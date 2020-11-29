@@ -1,0 +1,32 @@
+#!/bin/bash
+sudo su -
+sudo apt-get update -y
+sudo apt-get install gnupg
+wget -qO - https://www.mongodb.org/static/pgp/server-4.4.asc | sudo apt-key add -
+echo "deb [ arch=amd64,arm64 ] https://repo.mongodb.org/apt/ubuntu bionic/mongodb-org/4.4 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-4.4.list
+sudo apt-get update
+sudo apt-get install -y mongodb-org
+sudo systemctl start mongod
+sudo systemctl enable mongod
+file=mongod.conf
+addr=$(hostname -I)
+sed -i 's/127.0.0.1/'$addr'/' $file
+
+
+<!-- 
+ db.createUser(
+   {
+     user: "manish",
+     pwd: "manish",  
+     roles: [ { role: "userAdmin", db: "admin" } ]
+   } -->
+
+#works only if specify dbname in connection URI
+else will get authorization/authentication mongo error
+db.createUser(
+   {
+     user: "manish",
+     pwd: "manish",  
+     roles: [ { role: "readWrite", db: "Mongo" } ]
+   }
+)

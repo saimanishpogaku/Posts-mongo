@@ -1,0 +1,5 @@
+{
+	"POSTS_URI": "mongodb://<username>:<password>@<hostname or ip address>:27017/<Database name>",
+	"dbname":"Mongo"
+}
+
